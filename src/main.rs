@@ -7,8 +7,8 @@
 #![warn(clippy::print_stdout)]
 #![warn(clippy::print_stderr)]
 
+use std::fs;
 use std::sync::Arc;
-use std::time::Duration;
 
 use chrono::Utc;
 use config::Config;
@@ -36,6 +36,8 @@ async fn main() {
 
     let file = if let Ok(f) = std::env::var("CONFIG_FILE") {
         f
+    } else if fs::metadata("/etc/rac/client.toml").is_ok() {
+        "/etc/rac/client.toml".to_owned()
     } else {
         "client.toml".to_owned()
     };
