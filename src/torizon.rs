@@ -174,14 +174,9 @@ pub fn notls_http_client(config: &RacConfig) -> Result<reqwest::Client> {
 fn user_agent() -> String {
     format!(
         "RAC/{} ({}; {}; rustc-{}-{})",
-        env!("VERGEN_GIT_SEMVER"),
-        env!("VERGEN_GIT_SHA_SHORT"),
-        env!("VERGEN_BUILD_TIMESTAMP"),
-        env!("VERGEN_RUSTC_SEMVER"),
-        env!("VERGEN_CARGO_TARGET_TRIPLE"),
+        "1.0.0", "abcdefg", "2024-07-15", "1.63.0", "x86_64-unknown-linux-gnu"
     )
 }
-
 #[derive(Debug, Clone)]
 struct TorizonToughTransport {
     http: reqwest::Client,
