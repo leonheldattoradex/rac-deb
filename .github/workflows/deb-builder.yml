@@ -14,7 +14,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: ["ubuntu:20.04", "ubuntu:22.04", "ubuntu:24.04", "debian:stable", "debian:oldstable"]
+        os: ["ubuntu:focal", "ubuntu:jammy", "ubuntu:noble", "debian:bullseye", "debian:bookworm"]
         arch: ["amd64", "arm64", "armhf"]
         include:
           - arch: amd64
@@ -61,6 +61,10 @@ jobs:
           . /etc/os-release
           echo "DISTRO=$ID" >> $GITHUB_ENV
           echo "CODENAME=$VERSION_CODENAME" >> $GITHUB_ENV
+
+      - name: Update changelog distribution
+        run: |
+          sed -i "s/@@distribution@@/${{ env.CODENAME }}/" debian/changelog
 
       - name: Apply patches
         run:
