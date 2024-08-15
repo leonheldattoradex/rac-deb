@@ -42,11 +42,9 @@ jobs:
         if: ${{ matrix.arch != 'amd64'}}
 
       - name: Install Rust
-        uses: actions-rs/toolchain@v1
+        uses: dtolnay/rust-toolchain@stable
         with:
-          toolchain: stable
-          target: ${{ matrix.target }}
-          default: true
+          targets: ${{ matrix.target }}
 
       - name: Install cargo-deb
         run: cargo install cargo-deb
